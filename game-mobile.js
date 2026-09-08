@@ -240,11 +240,11 @@ function create() {
         isMuted = !isMuted;
         muteBtn.setText('MUTE: ' + (isMuted ? 'ON' : 'OFF'));
         muteBtn.setBackgroundColor(isMuted ? '#FF0000' : '#FFD700');
-        if (blueyAudio) {
+        if (blueyAudio && blueyAudio.isPlaying) {
             if (isMuted) {
-                blueyAudio.pause();
+                blueyAudio.stop();
             } else {
-                blueyAudio.resume();
+                playBlueyTheme(this);
             }
         }
     });
@@ -923,6 +923,30 @@ function createMobileControls(scene) {
     setupButtonTouchEvents(scene, mobileJumpBtn, 'jump');
     setupButtonTouchEvents(scene, mobileBackflipBtn, 'backflip');
     setupButtonTouchEvents(scene, mobileFrontflipBtn, 'frontflip');
+
+    // Bottom cheat buttons
+    const cheatBtnSize = 40;
+
+    // God mode button (G)
+    const godBtn = scene.add.rectangle(btnSize * 1.5, h - btnSize * 4, cheatBtnSize, cheatBtnSize, 0xFF00FF, 0.6)
+        .setScrollFactor(0).setDepth(500).setInteractive();
+    scene.add.text(btnSize * 1.5, h - btnSize * 4, 'GOD', { fontSize: '9px', fill: '#FFF', fontStyle: 'bold', align: 'center' })
+        .setScrollFactor(0).setDepth(501).setOrigin(0.5);
+    godBtn.on('pointerdown', () => { godMode = !godMode; console.log('God mode:', godMode ? 'ON' : 'OFF'); });
+
+    // Coins button (C)
+    const coinsBtn = scene.add.rectangle(btnSize * 1.5 + cheatBtnSize + 5, h - btnSize * 4, cheatBtnSize, cheatBtnSize, 0xFFD700, 0.6)
+        .setScrollFactor(0).setDepth(500).setInteractive();
+    scene.add.text(btnSize * 1.5 + cheatBtnSize + 5, h - btnSize * 4, '+100', { fontSize: '8px', fill: '#000', fontStyle: 'bold', align: 'center' })
+        .setScrollFactor(0).setDepth(501).setOrigin(0.5);
+    coinsBtn.on('pointerdown', () => { coins += 100; coinsText.setText('Coins: ' + coins); });
+
+    // Score button (S)
+    const scoreBtn = scene.add.rectangle(btnSize * 1.5 + (cheatBtnSize + 5) * 2, h - btnSize * 4, cheatBtnSize, cheatBtnSize, 0x00FF00, 0.6)
+        .setScrollFactor(0).setDepth(500).setInteractive();
+    scene.add.text(btnSize * 1.5 + (cheatBtnSize + 5) * 2, h - btnSize * 4, '+500', { fontSize: '8px', fill: '#000', fontStyle: 'bold', align: 'center' })
+        .setScrollFactor(0).setDepth(501).setOrigin(0.5);
+    scoreBtn.on('pointerdown', () => { score += 500; scoreText.setText('Score: ' + score); });
 }
 
 function setupButtonTouchEvents(scene, button, action) {
