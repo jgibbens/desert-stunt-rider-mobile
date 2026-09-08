@@ -241,7 +241,11 @@ function create() {
         muteBtn.setText('MUTE: ' + (isMuted ? 'ON' : 'OFF'));
         muteBtn.setBackgroundColor(isMuted ? '#FF0000' : '#FFD700');
         if (blueyAudio) {
-            blueyAudio.setVolume(isMuted ? 0 : 0.5);
+            if (isMuted) {
+                blueyAudio.pause();
+            } else {
+                blueyAudio.resume();
+            }
         }
     });
 
