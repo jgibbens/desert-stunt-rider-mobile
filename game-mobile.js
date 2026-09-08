@@ -227,14 +227,14 @@ function create() {
         playBlueyTheme(this);
     }
 
-    // Add mute button
-    const muteBtn = this.add.text(1100, 110, 'MUTE: OFF', {
-        fontSize: '18px',
+    // Add mute button next to score
+    const muteBtn = this.add.text(20, 100, 'MUTE: OFF', {
+        fontSize: '16px',
         fill: '#000',
         backgroundColor: '#FFD700',
-        padding: { x: 10, y: 5 },
+        padding: { x: 8, y: 4 },
         fontStyle: 'bold'
-    }).setScrollFactor(0).setInteractive();
+    }).setScrollFactor(0).setDepth(500).setInteractive();
 
     muteBtn.on('pointerdown', () => {
         isMuted = !isMuted;
