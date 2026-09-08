@@ -227,8 +227,8 @@ function create() {
         playBlueyTheme(this);
     }
 
-    // Add mute button next to score
-    const muteBtn = this.add.text(20, 100, 'MUTE: OFF', {
+    // Add mute button next to coins
+    const muteBtn = this.add.text(250, 60, 'MUTE: OFF', {
         fontSize: '16px',
         fill: '#000',
         backgroundColor: '#FFD700',
@@ -240,13 +240,22 @@ function create() {
         isMuted = !isMuted;
         muteBtn.setText('MUTE: ' + (isMuted ? 'ON' : 'OFF'));
         muteBtn.setBackgroundColor(isMuted ? '#FF0000' : '#FFD700');
-        if (isMuted) {
-            if (blueyAudio) blueyAudio.pause();
-        } else {
-            // Restart music when unmuting
-            if (blueyAudio) blueyAudio.play();
-            else playBlueyTheme(this);
+        if (blueyAudio) {
+            blueyAudio.setVolume(isMuted ? 0 : 0.5);
         }
+    });
+
+    // Add B button for bike menu on mobile
+    const bikeBtn = this.add.text(20, 140, 'B: BIKES', {
+        fontSize: '16px',
+        fill: '#000',
+        backgroundColor: '#FF00FF',
+        padding: { x: 8, y: 4 },
+        fontStyle: 'bold'
+    }).setScrollFactor(0).setDepth(500).setInteractive();
+
+    bikeBtn.on('pointerdown', () => {
+        this.input.keyboard.emit('keydown-B');
     });
 
     // NOW Create level
