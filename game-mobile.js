@@ -240,8 +240,12 @@ function create() {
         isMuted = !isMuted;
         muteBtn.setText('MUTE: ' + (isMuted ? 'ON' : 'OFF'));
         muteBtn.setBackgroundColor(isMuted ? '#FF0000' : '#FFD700');
-        if (blueyTheme) {
-            blueyTheme.setVolume(isMuted ? 0 : 0.5);
+        if (blueyAudio) {
+            if (isMuted) {
+                blueyAudio.pause();
+            } else {
+                blueyAudio.resume();
+            }
         }
     });
 
