@@ -952,6 +952,12 @@ function playBlueyTheme(scene) {
     const isLocalServer = window.location.protocol === 'http:' || window.location.protocol === 'https:';
     console.log('isLocalServer:', isLocalServer);
 
+    // Resume audio context for iOS
+    if (scene.sound.context && scene.sound.context.state === 'suspended') {
+        console.log('Resuming audio context for iOS');
+        scene.sound.context.resume();
+    }
+
     // Try to load level-specific music if on local server
     if (isLocalServer) {
         try {
