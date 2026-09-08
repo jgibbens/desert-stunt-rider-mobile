@@ -848,12 +848,18 @@ function checkFinish(bikeObj, platform, scene) {
 
         const chooseText = scene.add.text(600, 240, 'CHOOSE NEXT LEVEL:', { fontSize: '24px', fill: '#FFFF00', fontStyle: 'bold' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
 
-        const btn1 = scene.add.text(180, 320, 'L1\n(1)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#0066FF', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
-        const btn2 = scene.add.text(400, 320, 'L2\n(2)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#FF6600', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
-        const btn3 = scene.add.text(620, 320, 'L3\n(3)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#FF0099', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
-        const btn4 = scene.add.text(840, 320, 'L4\n(4)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#FF3300', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
+        const btn1 = scene.add.text(180, 320, 'L1\n(1)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#0066FF', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setInteractive();
+        const btn2 = scene.add.text(400, 320, 'L2\n(2)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#FF6600', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setInteractive();
+        const btn3 = scene.add.text(620, 320, 'L3\n(3)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#FF0099', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setInteractive();
+        const btn4 = scene.add.text(840, 320, 'L4\n(4)', { fontSize: '16px', fill: '#000', fontStyle: 'bold', backgroundColor: '#FF3300', padding: { x: 12, y: 10 }, align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setInteractive();
 
-        const retryText = scene.add.text(600, 420, 'RETRY (Press R)', { fontSize: '22px', fill: '#000', fontStyle: 'bold', backgroundColor: '#00DD00', padding: { x: 20, y: 12 } }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
+        btn1.on('pointerdown', () => { currentLevel = 1; score = 0; coins = 0; levelComplete = false; scene.scene.restart(); });
+        btn2.on('pointerdown', () => { currentLevel = 2; score = 0; coins = 0; levelComplete = false; scene.scene.restart(); });
+        btn3.on('pointerdown', () => { currentLevel = 3; score = 0; coins = 0; levelComplete = false; scene.scene.restart(); });
+        btn4.on('pointerdown', () => { currentLevel = 4; score = 0; coins = 0; levelComplete = false; scene.scene.restart(); });
+
+        const retryText = scene.add.text(600, 420, 'RETRY', { fontSize: '22px', fill: '#000', fontStyle: 'bold', backgroundColor: '#00DD00', padding: { x: 20, y: 12 } }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setInteractive();
+        retryText.on('pointerdown', () => { score = 0; coins = 0; levelComplete = false; scene.scene.restart(); });
     }
 }
 
